@@ -24,5 +24,8 @@ public:
     // Можете дополнить ваш класс нужными полями и методами
 private:
     // Можете дополнить ваш класс нужными полями и методами
-    std::unordered_map<Position, std::unique_ptr<CellInterface>> cells_;
+struct Hasher { 
+        size_t operator()(const Position& pos) const;
+    };
+    std::unordered_map<Position, std::unique_ptr<CellInterface>, Hasher> cells_;
 };
