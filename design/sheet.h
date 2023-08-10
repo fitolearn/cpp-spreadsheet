@@ -2,7 +2,7 @@
 
 #include "cell.h"
 #include "common.h"
-
+#include <unordered_map>
 #include <functional>
 
 class Sheet : public SheetInterface {
@@ -29,6 +29,11 @@ private:
     void PrintCells(std::ostream& output,
                     const std::function<void(const CellInterface&)>& printCell) const;
     Size GetActualSize() const;
-
-    std::vector<std::vector<std::unique_ptr<Cell>>> cells_;
+// new
+    bool IsCircularDependency(const CellInterface* cell, const Position& pos) const;
+    std::pair<Position, Position> GetArea() const;
+    struct Hasher { 
+        size_t operator()(const Position& pos) const;
+    };
+    std::unordered_map<Position, std::unique_ptr<CellInterface>, Hasher> cells_;
 };
