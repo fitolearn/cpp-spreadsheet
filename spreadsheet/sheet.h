@@ -2,7 +2,7 @@
 
 #include "cell.h"
 #include "common.h"
-
+#include <unordered_map>
 #include <functional>
 
 class Sheet : public SheetInterface {
@@ -24,5 +24,5 @@ public:
     // Можете дополнить ваш класс нужными полями и методами
 private:
     // Можете дополнить ваш класс нужными полями и методами
-    std::vector<std::vector<std::unique_ptr<Cell>>> cells_;
+    std::unordered_map<Position, std::unique_ptr<CellInterface>> cells_;
 };
